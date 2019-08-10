@@ -88,7 +88,6 @@ app.get("/campgrounds/:id",function(req,res){
 			res.render("show",{campground:foundCampground});	
 	});
 	
-	
 });
 
 app.listen(process.env.PORT||8000,process.env.IP,function(){
