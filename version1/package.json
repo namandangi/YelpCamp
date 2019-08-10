@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/namandangi/YelpCamp/issues"
   },
-  "homepage": "https://github.com/namandangi/YelpCamp#readme"
+  "homepage": "https://github.com/namandangi/YelpCamp#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "request": "^2.88.0"
+  }
 }
