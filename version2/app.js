@@ -3,6 +3,7 @@ var express =require("express"),
  	mongoose=require("mongoose"),
  	app=express(),
  	Campground = require("./models/campgrounds"),
+Comment = require("./models/comments"),
  	seedDB = require("./seeds");
 
 	
@@ -53,11 +54,15 @@ app.get("/campgrounds/new",function(req,res){
 
 //SHOW ROUTE 
 app.get("/campgrounds/:id",function(req,res){
-	Campground.findById(req.params.id,function(err,foundCampground){
+	Campground.findById(req.params.id).populate("comments").exec(function(err,foundCampground){
 		if(err)
 			{console.log(err);}
 		else
-			res.render("Show",{campground:foundCampground});	
+			{
+				console.log(foundCampground);
+				res.render("Show",{campground:foundCampground});		
+			}
+			
 	});
 	
 });
