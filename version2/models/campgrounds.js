@@ -6,8 +6,8 @@ var campgroundSchema=mongoose.Schema({
 	description:String,
 	comments :[
 		{
-			type : mongoose.Schema.type.ObjectId,
-			ref : "Comments"
+			type : mongoose.Schema.Types.ObjectId,
+			ref : "Comment"
 		}
 	]
 });
