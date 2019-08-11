@@ -3,7 +3,7 @@ var express =require("express"),
  	mongoose=require("mongoose"),
  	app=express(),
  	Campground = require("./models/campgrounds"),
-Comment = require("./models/comments"),
+	Comment = require("./models/comments"),
  	seedDB = require("./seeds");
 
 	
