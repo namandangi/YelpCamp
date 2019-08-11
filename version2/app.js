@@ -1,39 +1,17 @@
 var express =require("express"),
- bodyParser=require("body-parser"),
- mongoose=require("mongoose"),
- app=express(),
- Campground = require("./models/campgrounds");
+    bodyParser=require("body-parser"),
+ 	mongoose=require("mongoose"),
+ 	app=express(),
+ 	Campground = require("./models/campgrounds"),
+ 	seedDB = require("./seeds");
+
+	
 
 mongoose.connect("mongodb://localhost:27017/yelp_camp",{useNewUrlParser:true});
 app.set("view engine","ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
-
-
-// Campground.create({
-// 	name:"Lake View Camp",
-// 	image:"https://images.thrillophilia.com/image/upload/s--78avAk7E--/c_fill,f_auto,fl_strip_profile,h_300,q_auto,w_375/v1/images/photos/000/025/234/original/1561366752_01a136af-a9f0-4508-8692-18bc6788f87c.jpeg.jpg?1561366752",
-// 	description:"This Campground is set across a beautiful lake"
-// },function(err,campground){
-// 	if(err)
-// 		console.log(err);
-// 	else{
-// 		console.log("NEWLY CREATED CAMPGROUND");
-// 		console.log(campground);
-// 	}
-// });
-
-
-
-// var campgrounds=[
-// 	{name:"SGNP",image:"https://images.thrillophilia.com/image/upload/s--ZbEHTtJZ--/c_fill,f_auto,fl_strip_profile,h_300,q_auto,w_375/v1/images/photos/000/031/695/original/1560428830_2.jpg.jpg?1560428830"},
-// 	{name:"Lake View Camp",image:"https://images.thrillophilia.com/image/upload/s--78avAk7E--/c_fill,f_auto,fl_strip_profile,h_300,q_auto,w_375/v1/images/photos/000/025/234/original/1561366752_01a136af-a9f0-4508-8692-18bc6788f87c.jpeg.jpg?1561366752"},
-// 	{name:"Bhandardara",image:"https://images.thrillophilia.com/image/upload/s--mYSy5XFL--/c_fill,f_auto,fl_strip_profile,h_300,q_auto,w_375/v1/images/photos/000/128/192/original/1526384335_WP_20170716_12_06_55_Pro.jpg.jpg?1526384335"},
-// 	{name:"SGNP",image:"https://images.thrillophilia.com/image/upload/s--ZbEHTtJZ--/c_fill,f_auto,fl_strip_profile,h_300,q_auto,w_375/v1/images/photos/000/031/695/original/1560428830_2.jpg.jpg?1560428830"},
-// 	{name:"Lake View Camp",image:"https://images.thrillophilia.com/image/upload/s--78avAk7E--/c_fill,f_auto,fl_strip_profile,h_300,q_auto,w_375/v1/images/photos/000/025/234/original/1561366752_01a136af-a9f0-4508-8692-18bc6788f87c.jpeg.jpg?1561366752"},
-// 	{name:"Bhandardara",image:"https://images.thrillophilia.com/image/upload/s--mYSy5XFL--/c_fill,f_auto,fl_strip_profile,h_300,q_auto,w_375/v1/images/photos/000/128/192/original/1526384335_WP_20170716_12_06_55_Pro.jpg.jpg?1526384335"}
-// ];
-
+seedDB();
 
 app.get("/",function(req,res){
 	res.render("home");
