@@ -10,6 +10,7 @@ mongoose.connect("mongodb://localhost/yelp_camp_v4");
 app.use(bodyParser.urlencoded({extended: true}));
 //app.set("views","./views");
 app.set("view engine", "ejs");
+app.use(express.static(__dirname+"/public"));
 seedDB();
 
 app.get("/", function(req, res){
@@ -31,7 +32,7 @@ app.get("/campgrounds", function(req, res){
 //CREATE - add new campground to DB
 app.post("/campgrounds", function(req, res){
     // get data from form and add to campgrounds array
-    var name = req.body.name;
+    var name = req.body.name; //we get this using body-parser
     var image = req.body.image;
     var desc = req.body.description;
     var newCampground = {name: name, image: image, description: desc}
@@ -54,7 +55,8 @@ app.get("/campgrounds/new", function(req, res){
 // SHOW - shows more info about one campground
 app.get("/campgrounds/:id", function(req, res){
     //find the campground with provided ID
-    Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
+    Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){ 
+		//we get req.params.id using bodyParser --urlencoded:true
         if(err){
             console.log(err);
         } else {
