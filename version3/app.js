@@ -1,10 +1,13 @@
-var express     = require("express"),
-    app         = express(),
-    bodyParser  = require("body-parser"),
-    mongoose    = require("mongoose"),
-    Campground  = require("./models/campgrounds"),
-    Comment     = require("./models/comments"),
-    seedDB      = require("./seeds");
+var express         = require("express"),
+    app             = express(),
+    bodyParser      = require("body-parser"),
+    mongoose        = require("mongoose"),
+    passport        = require("passport"),
+    LocalStratergy  = require("passport-local"),
+    Campground      = require("./models/campgrounds"),
+    Comment         = require("./models/comments"),
+    User            = require("./models/users"),
+    seedDB          = require("./seeds");
     
 mongoose.connect("mongodb://localhost:27017/yelp_camp_v4",{ useNewUrlParser: true });
 app.use(bodyParser.urlencoded({extended: true}));
@@ -13,6 +16,10 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname+"/public"));
 seedDB();
 
+
+//REST Routes
+
+//HOME 
 app.get("/", function(req, res){
     res.render("home");
 });
@@ -32,7 +39,7 @@ app.get("/campgrounds", function(req, res){
 //CREATE - add new campground to DB
 app.post("/campgrounds", function(req, res){
     // get data from form and add to campgrounds array
-    var name = req.body.name; //we get this using body-parser
+    var name = req.body.name; //we get theses using body-parser
     var image = req.body.image;
     var desc = req.body.description;
     var newCampground = {name: name, image: image, description: desc}
@@ -105,6 +112,29 @@ app.post("/campgrounds/:id/comments", function(req, res){
    //connect new comment to campground
    //redirect campground show page
 });
+
+//  ===========
+// AUTH ROUTES
+//  ===========
+
+// show register form
+app.get("/register", function(req, res){
+    res.render("register"); 
+ });
+ //handle sign up logic
+ app.post("/register", function(req, res){
+     var newUser = new User({username: req.body.username});
+     User.register(newUser, req.body.password, function(err, user){
+         if(err){
+             console.log(err);
+             return res.render("register");
+         }
+         passport.authenticate("local")(req, res, function(){
+            res.redirect("/campgrounds"); 
+         });
+     });
+ });
+ 
 
 app.listen(process.env.PORT||3000, process.env.IP, function(){
    console.log("The YelpCamp Server Has Started!");
