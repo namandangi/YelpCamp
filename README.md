@@ -1,18 +1,14 @@
 # YelpCamp
-# This project aims at improving user-experience for selecting campgrounds and helping people discover many more fascinating locations.
-#  ________________________________________________________________
-  # Technology used :
+
+This project aims at improving user-experience for selecting campgrounds and helping people discover many more fascinating locations.
+
+## Technology Stack
+
+1.  MongoDB/MongoDBAtlas for database, Mongoose for ORM.
+2.  ExpressJS for server library.
+3.  Node.js for Environment
+3.  Embedded JavaScript for templating.
+4.  Passport.js for Authentication
   
-#  Back-End ==>
-  ## . Environment    : Node.js
-  ## . Framework      : Express.js
-  ## . Templates      : Embedded JavaScript
-  ## . Authentication : Passport.js 
-  ## . Database       : MongoDB/MongoDBAtlas
-  
-#  Front-End ==>
-  ## . Html5
-  ## . CSS
-  ## . Bootstrap4
   
   
