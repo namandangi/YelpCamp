@@ -9,7 +9,6 @@ middlewareObject.isLoggedIn     = (req, res, next)=>
     {
         if(req.isAuthenticated())
         {
-            req.flash("success","You have succesfully logged in !");
             return next();
         }
         req.flash("error","You most be logged in to do that !");
@@ -69,7 +68,14 @@ middlewareObject.commentOwnership   = (req,res,next)=>
                 {
                 //check if the comment is of the user
                     if(comment.author.id.equals(req.user._id))
-                    return next();
+                    {
+                        return next();
+                    }
+                    else 
+                    {
+                        req.flash("error","You do not have the permission to do that");
+                        res.redirect("back");
+                    }   
                 }
             });
         }
