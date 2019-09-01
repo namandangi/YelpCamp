@@ -1,7 +1,8 @@
-var express = require("express");
-var router  = express.Router();
-var Campground  = require("../models/campgrounds");
-
+const express            = require("express"),
+      router             = express.Router(),
+      Campground         = require("../models/campgrounds"),
+      middleware         = require('../middleware/index');
+      //we can also do middleware = require('../middleware');   since express automatically includes file named index.js when you require an entire directory
 
 
 //INDEX - show all campgrounds
@@ -17,12 +18,17 @@ router.get("", function(req, res){
 });
 
 //CREATE - add new campground to DB
-router.post("", function(req, res){
+router.post("", middleware.isLoggedIn, function(req, res){
     // get data from form and add to campgrounds array
     var name = req.body.name;
+    var price = req.body.price;
     var image = req.body.image;
     var desc = req.body.description;
-    var newCampground = {name: name, image: image, description: desc}
+    var authorData = {
+        id : req.user._id,
+        username : req.user.username
+    }
+    var newCampground = {name: name, image: image,price : price, description: desc,author:authorData}
     // Create a new campground and save to DB
     Campground.create(newCampground, function(err, newlyCreated){
         if(err){
@@ -35,7 +41,7 @@ router.post("", function(req, res){
 });
 
 //NEW - show form to create new campground
-router.get("/new", function(req, res){
+router.get("/new",middleware.isLoggedIn, function(req, res){
    res.render("campgrounds/new"); 
 });
 
@@ -46,11 +52,45 @@ router.get("/:id", function(req, res){
         if(err){
             console.log(err);
         } else {
-           /// console.log(foundCampground)
+            // console.log(foundCampground)
             //render show template with that campground
             res.render("campgrounds/show", {campground: foundCampground});
         }
     });
+});
+
+//EDIT 
+router.get("/:id/edit",middleware.campgroundOwnership,(req,res)=>{
+    Campground.findById(req.params.id,(err,foundCampground)=>{   
+    //    console.log(currentUser,foundCampground.author.id);
+        res.render("campgrounds/edit",{campground:foundCampground});        
+    });
+});
+
+
+//UPDATE
+router.put("/:id",(req,res)=>{
+        Campground.findByIdAndUpdate(req.params.id,req.body.campground,(err,campground)=>{
+            if(err)
+            {
+                console.log(err);
+                res.redirect("/campgrounds");
+            }
+            else{
+                res.redirect("/campgrounds/"+req.params.id);
+            }
+        });    
+});
+
+//DESTROY
+router.delete("/:id",(req,res)=>{
+    Campground.findByIdAndDelete(req.params.id,(err)=>{
+        if(err){
+            res.redirect("/campgrounds");
+        }
+        else
+        res.redirect("/campgrounds");
+    })
 });
 
 module.exports  = router;
