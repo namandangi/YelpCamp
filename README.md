@@ -1,7 +1,14 @@
 # YelpCamp
+[![HitCount](http://hits.dwyl.io/namandangi/YelpCamp.svg)](http://hits.dwyl.io/namandangi/YelpCamp)
 
 This project aims at improving user-experience for selecting campgrounds and helping people discover many more fascinating locations.
-[![HitCount](http://hits.dwyl.io/namandangi/YelpCamp.svg)](http://hits.dwyl.io/namandangi/YelpCamp)
+
+![](https://github.com/namandangi/YelpCamp/blob/master/version5/public/docs/Screenshot%20from%202020-01-15%2010-12-51.png)
+![](https://github.com/namandangi/YelpCamp/blob/master/version5/public/docs/Screenshot%20from%202020-01-15%2010-13-17.png)
+![](https://github.com/namandangi/YelpCamp/blob/master/version5/public/docs/Screenshot%20from%202020-01-15%2022-48-03.png)
+![](https://github.com/namandangi/YelpCamp/blob/master/version5/public/docs/Screenshot%20from%202020-01-15%2022-49-09.png)
+![](https://github.com/namandangi/YelpCamp/blob/master/version5/public/docs/Screenshot%20from%202020-01-15%2022-49-22.png)
+
 
 ## Technology Stack
 
@@ -32,9 +39,9 @@ This project aims at improving user-experience for selecting campgrounds and hel
    
   ## Contributing
   
-   1. Fork it (https://github.com/namandangi/BlogApp/fork)
+   1. Fork it (https://github.com/namandangi/YelpCamp/fork)
    2. Create your feature branch  (```git checkout -b feature/fooBar```)
-   3. Commit your changes (``git commit -m 'Add some fooBar'```)
+   3. Commit your changes (```git commit -m 'Add some fooBar'```)
    4. Push to the branch (```git push origin feature/fooBar```)
    5. Create a new Pull Request
   
